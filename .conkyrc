@@ -1,0 +1,58 @@
+#=========== Window Settings ==========================
+background no
+font  FreeMono:bold:size=10
+update_interval 1.0
+total_run_times 0
+own_window no
+own_window_type normal
+own_window_class override
+alignment top_right
+gap_x 12
+gap_y 12
+no_buffers yes
+
+
+# ================== Text Displays =====================
+
+TEXT
+${color white}Box Info ${hr 1}${color}
+# this location varies in distros.
+Time/Date: ${time %H:%M} ${time %d.%m.%Y} 
+${exec cat /etc/issue}
+CPU:${exec cat /proc/cpuinfo | grep "model name"| uniq|cut -d ":" -f 2}
+Kernel: $alignr$kernel
+Uptime: $alignr$uptime
+CPU: ${alignr}${freq} MHz
+Processes: ${alignr}$processes ($running_processes running)
+Load: ${alignr}$loadavg
+Packages: ${alignr} ${exec pacman -Q | wc -l }
+${color green}
+CPU1 ${alignr}${cpu cpu1}%
+${cpugraph cpu1 }
+CPU2 ${alignr}${cpu cpu2}%
+${cpugraph cpu2 }
+${color green}
+Ram ${alignr}$mem / $memmax ($memperc%)
+${membar 4 mem}
+${color }
+swap ${alignr}$swap / $swapmax ($swapperc%)
+${swapbar 4}
+
+Highest CPU $alignr CPU% MEM%
+${top name 1}$alignr${top cpu 1}${top mem 1}
+${top name 2}$alignr${top cpu 2}${top mem 2}
+${top name 3}$alignr${top cpu 3}${top mem 3}
+Highest MEM $alignr CPU% MEM%
+${top_mem name 1}$alignr${top_mem cpu 1}${top_mem mem 1}
+${top_mem name 2}$alignr${top_mem cpu 2}${top_mem mem 2}
+${top_mem name 3}$alignr${top_mem cpu 3}${top_mem mem 3}
+
+${color grey}HDD ${hr 1}${color grey}
+${color white}root: ${alignr}${fs_free /} / ${fs_size /}
+${color cyan}${fs_bar 4 /}
+
+${color white}NETWORK ${hr 1}
+dhcp ip:${addr enp2s0} 
+Down ${downspeed enp2s0}  ${alignr}Up ${upspeed enp2s0} 
+${downspeedgraph enp2s0  25,107} ${alignr}${upspeedgraph enp2s0 25,107}
+Total ${totaldown enp2s0} ${alignr}Total ${totalup enp2s0}
