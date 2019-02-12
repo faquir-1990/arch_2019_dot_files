@@ -14,7 +14,7 @@ alias rm='rm -i'
 alias c='clear'
 alias grep='grep -n --color'
 alias sd='sudo shutdown -h now'
-
+alias q='exit'
 ########################################################
 
 
@@ -25,5 +25,10 @@ alias sd='sudo shutdown -h now'
 
 PS1="\e[1m\e[32m[\u\e[34m@\e[32m\h \W]\e[0m% "   
 
-#set console font after each login .. 
-setfont  iso01-12x22.psfu.gz
+# set console font after each login .. 
+# if there's no display
+
+if [ -n $DISPLAY  ]  ; then
+	#echo "no DISPLAY"
+	/usr/bin/setfont  iso01-12x22.psfu.gz 
+fi
